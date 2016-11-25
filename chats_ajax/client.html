@@ -26,7 +26,26 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript">	
-		
+		function updateChat() {
+			$.ajax({
+				url: "http://localhost:8080/understand_ajax/chats_ajax/server.php",
+				type: "get",
+				data: "last_displayed_chat_id="+$('#last_displayed_chat_id').val(),
+				dataType: "JSON",
+				success: function(response,status,http){
+					$.each(response, function(index, item){
+						$("#chat_box").val( $("#chat_box").val() + item.user_name + " : " + item.user_comment + "\n");
+						$("#last_displayed_chat_id").val(item.chat_id);
+					});
+				},
+				error: function(http,status,error){
+					alert("some error occurred: " + error);
+				}
+			});
+		}
+
+		//updateChat();
+		setInterval(updateChat, 4000);
 </script>
 
 

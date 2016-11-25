@@ -8,8 +8,7 @@
 	// Connect to MySQL server
 	$con = mysqli_connect("localhost", "root", "", "group_chat");
 
-	// 
-	$select = "SELECT * FROM chats WHERE chat_id > '".$last_displayed_chat_id."' ";
+	$select = "SELECT * FROM chats WHERE chat_id > '".$last_displayed_chat_id."'";
 
 	$result = mysqli_query( $con , $select );
 
@@ -25,7 +24,7 @@
 	}
 
 	// Close mysql connection
-	mysql_close( $con );
+	mysqli_close( $con );
 
 	// Return the response as JSON
 	echo json_encode($arr);

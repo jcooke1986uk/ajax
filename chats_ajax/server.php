@@ -8,6 +8,19 @@
 	// Connect to MySQL server
 	$con = mysqli_connect("localhost", "root", "", "group_chat");
 
+	// If user_name and user_comment is available then
+	// add it in table chats
+
+	if (isset( $data['user_name']) && isset($data['user_comment'] ))
+	{
+			$insert = " 
+			INSERT INTO chats( user_name , user_comment) 
+			VALUES( '".$data['user_name']."' , '".$data[user_comment]."')
+			";
+
+			$insert_result = mysqli_query($con, $insert);
+	}
+
 	$select = "SELECT * FROM chats WHERE chat_id > '".$last_displayed_chat_id."'";
 
 	$result = mysqli_query( $con , $select );
